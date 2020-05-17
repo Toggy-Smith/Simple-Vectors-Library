@@ -5,7 +5,8 @@ namespace svl
     template <class BaseType>
     class Vector2 {
         public:
-            BaseType x, y;
+            BaseType x{};
+            BaseType y{};
         
         public:
             template <typename Scalar>
