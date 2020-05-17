@@ -4,99 +4,116 @@ namespace svl
 {
     template <class BaseType>
     class Vector2 {
-        public:
-            BaseType x{};
-            BaseType y{};
-        
-        public:
-            template <typename Scalar>
-            Vector2 operator*
-            (Scalar scalar)
-            {
-                return Vector2{x * scalar,
-                               y * scalar};
-            }
+    public:
+        BaseType x;
+        BaseType y;
 
-            template <typename Scalar>
-            void operator*=
-            (Scalar scalar)
-            {
-                x *= scalar;
-                y *= scalar;
-            }
+    public:
+        Vector2
+        (BaseType x, BaseType y)
+            : x(x), y(y)
+        {}
 
-            template <typename Scalar>
-            Vector2 operator/
-            (Scalar scalar)
-            {
-                return Vector2{x / scalar,
-                               y / scalar};
-            }
+        Vector2()
+            : x(0), y (0)
+        {}
 
-            template <typename Scalar>
-            void operator/=
-            (Scalar scalar)
-            {
-                x /= scalar;
-                y /= scalar;
-            }
+        Vector2
+        (const Vector2& copy)
+            : x(copy.x), y(copy.y)
+        {}
 
-            Vector2 operator+
-            (Vector2& vector)
-            {
-                return Vector2{x + vector.x,
-                               y + vector.y};
-            }
+        Vector2& operator=
+        (const Vector2& vector)
+        {
+            x = vector.x;
+            y = vector.y;
 
-            void operator+=
-            (Vector2& vector)
-            {
-                x += vector.x;
-                y += vector.y;
-            }
+            return *this;
+        }
 
-            Vector2 operator-
-            (Vector2& vector)
-            {
-                return Vector2{x - vector.x,
-                               y - vector.y};
-            }
+        template <typename Scalar>
+        Vector2 operator*
+        (Scalar scalar)
+        {
+            return Vector2{ x * scalar,
+                           y * scalar };
+        }
 
-            void operator-=
-            (Vector2& vector)
-            {
-                x -= vector.x;
-                y -= vector.y;
-            }
+        template <typename Scalar>
+        void operator*=
+        (Scalar scalar)
+        {
+            x *= scalar;
+            y *= scalar;
+        }
 
-            Vector2 operator=
-            (const Vector2& vector)
-            {
-                return Vector2{ vector.x, vector.y };
-            }
+        template <typename Scalar>
+        Vector2 operator/
+        (Scalar scalar)
+        {
+            return Vector2{ x / scalar,
+                           y / scalar };
+        }
 
-            float magnitude() {
-                return std::sqrt(
-                       std::pow(x, 2)
-                       +
-                       std::pow(y, 2)
-                       );
-            }
+        template <typename Scalar>
+        void operator/=
+        (Scalar scalar)
+        {
+            x /= scalar;
+            y /= scalar;
+        }
 
-            Vector2 normalize() {
-                float mag = magnitude();
+        Vector2 operator+
+        (Vector2& vector)
+        {
+            return Vector2{ x + vector.x,
+                           y + vector.y };
+        }
 
-                x /= mag;
-                y /= mag;
+        void operator+=
+        (Vector2& vector)
+        {
+            x += vector.x;
+            y += vector.y;
+        }
 
-                return Vector2{ x, y };
-            }
+        Vector2 operator-
+        (Vector2& vector)
+        {
+            return Vector2{ x - vector.x,
+                           y - vector.y };
+        }
 
-            float dotProduct
-            (Vector2& vector) {
-                return (x * vector.x) +
-                       (y * vector.y);
-            }
+        void operator-=
+        (Vector2& vector)
+        {
+            x -= vector.x;
+            y -= vector.y;
+        }
+
+        float magnitude() {
+            return std::sqrt(
+                std::pow(x, 2)
+                +
+                std::pow(y, 2)
+            );
+        }
+
+        Vector2 normalize() {
+            float mag = magnitude();
+
+            x /= mag;
+            y /= mag;
+
+            return Vector2{ x, y };
+        }
+
+        float dotProduct
+        (Vector2& vector) {
+            return (x * vector.x) +
+                (y * vector.y);
+        }
     };
 
     typedef Vector2<double>       Vector2d;
