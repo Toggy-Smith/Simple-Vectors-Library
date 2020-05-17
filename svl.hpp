@@ -68,7 +68,7 @@ namespace svl
                 y -= vector.y;
             }
 
-            Vector2& operator=
+            Vector2 operator=
             (const Vector2& vector)
             {
                 return Vector2{ vector.x, vector.y };
