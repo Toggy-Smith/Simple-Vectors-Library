@@ -124,6 +124,23 @@ vector.normalize();
 
 std::cout << vector.magnitude(); // Output: 1
 ```
+If the magnitude of the vector is zero when the `normalize()` function is called, the vector will remain unchanged.
+
+## Setting the magnitude of a vector
+
+You can use the setMagnitude(float magnitude) function to change the magnitude of a vector while retaining its direction:
+
+```C++
+svl::Vector2f vector{ 1.0f, 1.0f };
+
+std::cout << vector.magnitude() << "\n"; // Output: 1.41421
+
+vector.setMagnitude(3.0f);
+
+std::cout << vector.magnitude() << "\n"; // Output: 3
+```
+
+Inside this function simply normalizes the vector then multiplies it by the desired magnitude.
 
 ## Finding the dot product of two vectors
 
