@@ -100,8 +100,17 @@ namespace svl
             );
         }
 
+        void setMagnitude(float magnitude) {
+            normalize();
+
+            (*this) *= magnitude;
+        }
+
         Vector2 normalize() {
             float mag = magnitude();
+
+            if (mag == 0)
+                return *this;
 
             x /= mag;
             y /= mag;
