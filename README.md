@@ -128,7 +128,7 @@ If the magnitude of the vector is zero when the `normalize()` function is called
 
 ## Setting the magnitude of a vector
 
-You can use the setMagnitude(float magnitude) function to change the magnitude of a vector while retaining its direction:
+You can use the `setMagnitude()` function to change the magnitude of a vector while retaining its direction:
 
 ```C++
 svl::Vector2f vector{ 1.0f, 1.0f };
