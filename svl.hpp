@@ -92,7 +92,7 @@ namespace svl
             y -= vector.y;
         }
 
-        float magnitude() {
+        float getMagnitude() {
             return std::sqrt(
                 std::pow(x, 2)
                 +
