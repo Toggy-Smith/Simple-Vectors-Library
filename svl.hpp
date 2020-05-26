@@ -72,7 +72,7 @@ namespace svl
         }
 
         void operator+=
-        (Vector2& vector)
+        (const Vector2& vector)
         {
             x += vector.x;
             y += vector.y;
@@ -86,7 +86,7 @@ namespace svl
         }
 
         void operator-=
-        (Vector2& vector)
+        (const Vector2& vector)
         {
             x -= vector.x;
             y -= vector.y;
