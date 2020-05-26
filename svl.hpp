@@ -107,7 +107,7 @@ namespace svl
         }
 
         Vector2 normalize() {
-            float mag = magnitude();
+            float mag = getMagnitude();
 
             if (mag == 0)
                 return *this;
