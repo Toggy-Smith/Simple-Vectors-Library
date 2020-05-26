@@ -65,7 +65,7 @@ namespace svl
         }
 
         Vector2 operator+
-        (Vector2& vector)
+        (const Vector2& vector) const
         {
             return Vector2{ x + vector.x,
                            y + vector.y };
@@ -79,7 +79,7 @@ namespace svl
         }
 
         Vector2 operator-
-        (Vector2& vector)
+        (const Vector2& vector) const
         {
             return Vector2{ x - vector.x,
                            y - vector.y };
