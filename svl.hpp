@@ -1,132 +1,96 @@
 #include <cmath>
 
-namespace svl
-{
-    template <class BaseType>
-    class Vector2 {
-    public:
-        BaseType x;
-        BaseType y;
+namespace svl {
+	class Vector {
+		public:
+			float x, y;
 
-    public:
-        Vector2
-        (BaseType x, BaseType y)
-            : x(x), y(y)
-        {}
+			Vector(float x, float y) : x(x), y(y) {}
+			Vector(const Vector& copy) : x(copy.x), y(copy.y) {}
+			
+			Vector& operator=(const Vector& vector) {
+				x = vector.x;
+				y = vector.y;
 
-        Vector2()
-            : x(0), y (0)
-        {}
+				return *this;
+			}
 
-        Vector2
-        (const Vector2& copy)
-            : x(copy.x), y(copy.y)
-        {}
+			template <typename Scalar>
+			Vector operator*(Scalar scalar) {
+				return Vector(x * scalar, y * scalar);
+			}
 
-        Vector2& operator=
-        (const Vector2& vector)
-        {
-            x = vector.x;
-            y = vector.y;
+			template <typename Scalar>
+			Vector operator*=(Scalar scalar) {
+				return Vector(x *= scalar, y *= scalar);
+			}
 
-            return *this;
-        }
+			template <typename Scalar>
+			Vector operator/(Scalar scalar) {
+				return Vector(x / scalar, y / scalar);
+			}
 
-        template <typename Scalar>
-        Vector2 operator*
-        (Scalar scalar)
-        {
-            return Vector2{ x * scalar,
-                           y * scalar };
-        }
+			template <typename Scalar>
+			Vector operator/=(Scalar scalar) {
+				return Vector(x /= scalar, y /= scalar);
+			}
 
-        template <typename Scalar>
-        void operator*=
-        (Scalar scalar)
-        {
-            x *= scalar;
-            y *= scalar;
-        }
+			Vector operator+(const Vector& vector) const {
+				return Vector(x + vector.x, y + vector.y);
+			}
 
-        template <typename Scalar>
-        Vector2 operator/
-        (Scalar scalar)
-        {
-            return Vector2{ x / scalar,
-                           y / scalar };
-        }
+			Vector operator+=(const Vector& vector) {
+				return Vector(x += vector.x, y += vector.y);
+			}
 
-        template <typename Scalar>
-        void operator/=
-        (Scalar scalar)
-        {
-            x /= scalar;
-            y /= scalar;
-        }
+			Vector operator-(const Vector& vector) const {
+				return Vector(x - vector.x, y - vector.y);
+			}
 
-        Vector2 operator+
-        (const Vector2& vector) const
-        {
-            return Vector2{ x + vector.x,
-                           y + vector.y };
-        }
+			Vector operator-=(const Vector& vector) {
+				return Vector(x -= vector.x, y -= vector.y);
+			}
 
-        void operator+=
-        (const Vector2& vector)
-        {
-            x += vector.x;
-            y += vector.y;
-        }
+			float getMagnitude() const {
+				return std::sqrt(std::pow(x, 2) + std::pow(y, 2));
+			}
 
-        Vector2 operator-
-        (const Vector2& vector) const
-        {
-            return Vector2{ x - vector.x,
-                           y - vector.y };
-        }
+			void setMagnitude(float magnitude) {
+				normalize();
 
-        void operator-=
-        (const Vector2& vector)
-        {
-            x -= vector.x;
-            y -= vector.y;
-        }
+				(*this) *= magnitude;
+			}
 
-        float getMagnitude() {
-            return std::sqrt(
-                std::pow(x, 2)
-                +
-                std::pow(y, 2)
-            );
-        }
+			Vector normalize() {
+				float magnitude = getMagnitude();
 
-        void setMagnitude(float magnitude) {
-            normalize();
+				if (magnitude == 0)
+					return *this;
 
-            (*this) *= magnitude;
-        }
+				x /= magnitude;
+				y /= magnitude;
 
-        Vector2 normalize() {
-            float mag = getMagnitude();
+				return Vector(x, y);
+			}
 
-            if (mag == 0)
-                return *this;
+			float dotProduct(const Vector& vector) const {
+				return (x * vector.x) + (y * vector.y);
+			}
 
-            x /= mag;
-            y /= mag;
+			bool limit(const float LIMIT) {
+				if (getMagnitude() > LIMIT) {
+					setMagnitude(LIMIT);
 
-            return Vector2{ x, y };
-        }
+					return true;
+				} else {
+					return false;
+				}
+			}
+	};
 
-        float dotProduct
-        (Vector2& vector) {
-            return (x * vector.x) +
-                (y * vector.y);
-        }
-    };
-
-    typedef Vector2<double>       Vector2d;
-    typedef Vector2<float>        Vector2f;
-    typedef Vector2<int>          Vector2i;
-    typedef Vector2<unsigned int> Vector2u;
+	const Vector ZERO = Vector(0.0f, 0.0f);
+	const Vector LEFT = Vector(-1.0f, 0.0f);
+	const Vector RIGHT = Vector(1.0f, 0.0f);
+	const Vector UP = Vector(0.0f, -1.0f);
+	const Vector DOWN = Vector(0.0f, 1.0f);
 }
